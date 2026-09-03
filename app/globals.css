@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Sora:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #0b1717;
+  --ink-soft: #142625;
+  --moss: #b9ff76;
+  --aqua: #7de7d4;
+  --fog: #dce9e2;
+  --muted: #91a7a0;
+}
+
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--fog);
+  font-family: 'Sora', ui-sans-serif, system-ui, sans-serif;
+}
+button, input, textarea { font: inherit; }
+button { cursor: pointer; }
+
+::selection { background: rgba(185, 255, 118, 0.28); color: #efffdc; }
+
+.grid-noise {
+  background-image: linear-gradient(rgba(185,255,118,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(185,255,118,.035) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+.glass {
+  background: linear-gradient(135deg, rgba(25, 47, 44, 0.84), rgba(10, 25, 24, 0.73));
+  border: 1px solid rgba(220, 233, 226, 0.11);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.19), inset 0 1px rgba(255, 255, 255, 0.045);
+  backdrop-filter: blur(18px);
+}
+
+.thin-scrollbar { scrollbar-width: thin; scrollbar-color: rgba(185,255,118,.3) transparent; }
+.thin-scrollbar::-webkit-scrollbar { width: 5px; }
+.thin-scrollbar::-webkit-scrollbar-thumb { background: rgba(185,255,118,.3); border-radius: 999px; }
+
+.map-shell canvas { display: block; }
+.map-shell { background: radial-gradient(circle at 50% 36%, rgba(47, 103, 88, .28), transparent 48%), #0d2120; }
+
+@media (max-width: 768px) {
+  .map-shell { min-height: 48vh; }
+}

@@ -1,0 +1,12 @@
+"use client";
+
+import { CheckCircle2, CircleDashed, Crosshair, Flag, Target } from "lucide-react";
+import { ProgressBar } from "./ProgressBar";
+import type { Mission } from "@/lib/types";
+
+export function MissionPanel({ missions, compact = false }: { missions: Mission[]; compact?: boolean }) {
+  const current = missions.filter((mission) => !mission.completed);
+  const done = missions.length - current.length;
+  return <div className="flex h-full min-h-0 flex-col"><div className="mb-4 flex items-start justify-between"><div><div className="flex items-center gap-2 text-sm font-semibold text-[#eaffef]"><Target size={16} className="text-[#b9ff76]" /> Missões ativas</div><p className="mt-1 text-[10px] text-[#78958a]">A cidade reage ao seu olhar.</p></div><div className="rounded-lg border border-[#b9ff76]/15 bg-[#b9ff76]/[.06] px-2 py-1 text-[10px] text-[#b9ff76]">{done}/{missions.length} concluídas</div></div>
+    <div className="thin-scrollbar min-h-0 flex-1 space-y-3 overflow-y-auto pr-1">{missions.slice(0, compact ? 3 : undefined).map((mission) => <div key={mission.id} className={`rounded-2xl border p-3.5 transition ${mission.completed ? "border-[#b9ff76]/15 bg-[#b9ff76]/[.045]" : "border-white/8 bg-[#071614]/45"}`}><div className="flex items-start gap-3"><div className={`mt-0.5 ${mission.completed ? "text-[#b9ff76]" : "text-[#6f8f83]"}`}>{mission.completed ? <CheckCircle2 size={17} /> : <CircleDashed size={17} />}</div><div className="min-w-0 flex-1"><div className="flex items-start justify-between gap-2"><div className="text-xs font-medium text-[#dceee2]">{mission.title}</div><span className="shrink-0 text-[9px] uppercase tracking-[0.12em] text-[#78958a]">{mission.difficulty}</span></div><p className="mt-1.5 text-[10px] leading-4 text-[#89a59a]">{mission.description}</p><div className="mt-3 flex items-center justify-between text-[9px] text-[#719187]"><span className="flex items-center gap-1"><Crosshair size={11} /> {mission.objective}</span><span className="font-mono">{Math.min(mission.progress, mission.target)}/{mission.target}</span></div><ProgressBar value={(mission.progress / mission.target) * 100} className="mt-2" /></div></div></div>)}</div><div className="mt-4 flex items-center gap-2 border-t border-white/8 pt-3 text-[10px] text-[#728f85]"><Flag size={12} className="text-[#b9ff76]" /> Recompensas totalizam <span className="text-[#b9ff76]">{missions.reduce((total, item) => total + item.reward, 0)} XP</span></div></div>;
+}
